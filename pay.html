@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuseBot</title>
+    <style>
+        body {
+            font-family: 'Verdana', sans-serif;
+            background: linear-gradient(to right, #3D52A0, #7091E6);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #EDE8F5;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            color: #333;
+        }
+        h1 {
+            color: #3D52A0;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #7091E6;
+        }
+        .price-info {
+            font-size: 1.2em;
+            color: #8697C4;
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: 1px solid #ADBBDA;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[type="number"]:focus {
+            border-color: #7091E6;
+            box-shadow: 0 0 8px rgba(112, 145, 230, 0.5);
+            outline: none;
+        }
+        button {
+            margin-top: 30px;
+            padding: 15px 25px;
+            background: #3D52A0;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            display: block; /* Change to block for centering */
+            margin-left: auto; /* Centering styles */
+            margin-right: auto; /* Centering styles */
+        }
+        button:hover {
+            background: #7091E6;
+            transform: scale(1.05);
+        }
+        button:active {
+            background: #8697C4;
+        }
+        .total-amount {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #3D52A0; /* Use the main theme color for total amount */
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Museum Booking</h1>
+        <form id="ticketForm">
+            <label for="childQuantity">Child (Below 18 years)</label>
+            <span class="price-info">INR 20.00</span>
+            <input type="number" id="childQuantity" name="childQuantity" value="0" min="0">
+
+            <label for="adultQuantity">Adult</label>
+            <span class="price-info">INR 75.00</span>
+            <input type="number" id="adultQuantity" name="adultQuantity" value="0" min="0">
+
+            <label for="seniorQuantity">Foreign Nationals</label>
+            <span class="price-info">INR 500.00</span>
+            <input type="number" id="seniorQuantity" name="seniorQuantity" value="0" min="0">
+        </form>
+        <div class="total-amount" id="totalAmount">Total Amount: INR 0.00</div>
+        <button type="button" id="proceedButton" onclick="calculateTotal()">Proceed to Checkout</button>
+        <button id="payButton" style="display:none;" onclick="redirectToPayment()">Proceed to Pay</button>
+    </div>
+
+    <script>
+        function calculateTotal() {
+            // Prices
+            const childPrice = 20.00;
+            const adultPrice = 75.00;
+            const seniorPrice = 500.00;
+
+            // Quantities
+            const childQuantity = parseInt(document.getElementById('childQuantity').value) || 0;
+            const adultQuantity = parseInt(document.getElementById('adultQuantity').value) || 0;
+            const seniorQuantity = parseInt(document.getElementById('seniorQuantity').value) || 0;
+
+            // Calculate total amount
+            const totalAmount = (childQuantity * childPrice) + (adultQuantity * adultPrice) + (seniorQuantity * seniorPrice);
+
+            if (totalAmount === 0) {
+                alert("Please enter valid quantities for all ticket types.");
+                return; 
+            }
+
+            // Update total amount display
+            document.getElementById('totalAmount').textContent = `Total Amount: INR ${totalAmount.toFixed(2)}`;
+            document.getElementById('totalAmount').style.display = 'block'; // Show total amount
+
+            // Hide the proceed button and show the pay button
+            document.getElementById('proceedButton').style.display = 'none';
+            document.getElementById('payButton').style.display = 'block';
+        }
+
+        function redirectToPayment() {
+            // Prices
+            const childPrice = 20.00;
+            const adultPrice = 75.00;
+            const seniorPrice = 500.00;
+
+            // Quantities
+            const childQuantity = parseInt(document.getElementById('childQuantity').value) || 0;
+            const adultQuantity = parseInt(document.getElementById('adultQuantity').value) || 0;
+            const seniorQuantity = parseInt(document.getElementById('seniorQuantity').value) || 0;
+
+            // Calculate total amount
+            const totalAmount = (childQuantity * childPrice) + (adultQuantity * adultPrice) + (seniorQuantity * seniorPrice);
+
+            // Redirect to payment page with parameters in the URL
+            window.location.href = `payment.html?child=${childQuantity}&adult=${adultQuantity}&senior=${seniorQuantity}&total=${totalAmount.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

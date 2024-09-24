@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuseBot-Payment</title>
+
+    <!-- Custom CSS file link -->
+    <link rel="stylesheet" href="paystyle.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #EDE8F5;
+            color: #3D52A0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: white;
+            border: 2px solid #28a745; /* Green border */
+            border-radius: 8px;
+        }
+
+        .success-message img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .success-message h3 {
+            color: green;
+            margin-top: 10px;
+            font-size: 1.5em; /* Larger text */
+            font-weight: bold; /* Bold text */
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .cancel-btn, .submit-btn {
+            background-color: #3498db; /* Button color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+            flex: 1; /* Make buttons the same size */
+        }
+
+        .cancel-btn {
+            background-color: rgb(164, 45, 45); /* Cancel button color */
+        }
+
+        .email-box {
+            margin-top: 20px;
+            display: flex; /* Align label and input side by side */
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .email-box label {
+            margin-right: 10px;
+            font-size: 1.2em; /* Larger label text */
+            font-weight: bold; /* Bold label text */
+        }
+
+        .email-box input[type="email"] {
+            padding: 10px;
+            width: 70%; /* Adjust width */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .email-box input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .email-box input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .inputBox {
+            margin-bottom: 15px;
+        }
+
+        .inputBox span {
+            font-weight: bold; /* Bold input labels */
+        }
+
+        .inputBox input {
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .col {
+            flex: 1;
+            padding: 10px;
+        }
+        .send-receipt-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.send-receipt-btn:hover {
+    background-color: #2980b9;
+}
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <form id="payment-form">
+
+        <div class="row">
+
+            <div class="col">
+                <h3 class="title">Billing Address</h3>
+                <!-- <div class="inputBox">
+                    <span>Full Name :</span>
+                    <input type="text" placeholder="John Doe" required>
+                </div> -->
+                <!-- <div class="inputBox">
+                    <span>Email :</span>
+                    <input type="email" placeholder="example@example.com" required>
+                </div> -->
+                <div class="inputBox">
+                    <span>Address :</span>
+                    <input type="text" placeholder="Room - Street - Locality" required>
+                </div>
+                <div class="inputBox">
+                    <span>City :</span>
+                    <input type="text" placeholder="Mumbai" required>
+                </div>
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>State :</span>
+                        <input type="text" placeholder="India" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>Pincode :</span>
+                        <input type="text" placeholder="123 456" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <h3 class="title">Payment</h3>
+                <div class="inputBox">
+                    <span>Cards Accepted :</span>
+                    <img src="card_img.png" alt="Card Images">
+                </div>
+                <div class="inputBox">
+                    <span>Name on Card :</span>
+                    <input type="text" placeholder="Mr. John Doe" required>
+                </div>
+                <div class="inputBox">
+                    <span>Credit Card Number :</span>
+                    <input type="number" placeholder="1111-2222-3333-4444" required>
+                </div>
+                <div class="inputBox">
+                    <span>Exp Month :</span>
+                    <input type="text" placeholder="January" required>
+                </div>
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>Exp Year :</span>
+                        <input type="number" placeholder="2022" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>CVV :</span>
+                        <input type="text" placeholder="1234" required>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <input type="submit" value="Pay" class="submit-btn">
+            <button type="button" class="cancel-btn" onclick="cancelPayment()">Cancel Payment</button>
+        </div>
+
+    </form>
+
+    <div class="success-message" id="success-message">
+        <img src="https://img.icons8.com/emoji/48/000000/check-mark-emoji.png" alt="Success">
+        <h3>Payment Successful!!<br> Enjoy your booking.</h3>
+
+        <div class="email-box">
+            <label for="emailReceipt">Enter your email to get a receipt:</label>
+            <input type="email" id="emailReceipt" placeholder="your-email@example.com" required>
+        </div>
+        <input type="submit" value="Send Receipt" class="send-receipt-btn" onclick="sendReceipt()">
+        
+
+    </div>
+</div>
+
+<!-- JavaScript to handle form submission -->
+<script>
+    const form = document.getElementById('payment-form');
+    const successMessage = document.getElementById('success-message');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent form from submitting
+        form.style.display = 'none'; // Hide the form
+        successMessage.style.display = 'block'; // Show success message
+    });
+
+    function cancelPayment() {
+        alert("Payment has been cancelled.");
+        // Optionally reset the form
+        form.reset();
+    }
+
+    function sendReceipt() {
+        const email = document.getElementById('emailReceipt').value;
+        if (email) {
+            alert("Receipt sent to " + email);
+        } else {
+            alert("Please enter a valid email address.");
+        }
+    }
+</script>
+
+</body>
+</html>
